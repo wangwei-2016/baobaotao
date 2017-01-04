@@ -20,8 +20,8 @@
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
         <property name="dataSource" ref="dataSource"/>
-        <!--<property name="mapperLocations" value="classpath:net/xuele/ipadApi/mapping/IpadServerMapper.xml"/>-->
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <property name="mapperLocations" value="classpath:mybatis/*.xml"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
@@ -50,12 +50,12 @@
             <tx:method name="search*" propagation="SUPPORTS" />
             <tx:method name="query*" propagation="SUPPORTS" />
 
-            <tx:method name="*" propagation="SUPPORTS" />
+            <!--<tx:method name="*" propagation="SUPPORTS" />-->
         </tx:attributes>
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut id="transactionPointcut" expression="execution(public * com.baobaotao.service.impl.*Impl(..))" />
+        <aop:pointcut id="transactionPointcut" expression="execution(public * com.baobaotao.service.*.*(..))" />
         <aop:advisor advice-ref="transactionInterceptor" pointcut-ref="transactionPointcut"/>
     </aop:config>
 </beans>

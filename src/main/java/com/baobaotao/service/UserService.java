@@ -23,7 +23,7 @@ public interface UserService {
 
     /**
      *  更新用户最后登录时间、ip、积分
-     * @param user
+     * @param user 用户
      */
     void loginSuccess(User user);
 }

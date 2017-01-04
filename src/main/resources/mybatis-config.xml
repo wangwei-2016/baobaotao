@@ -13,7 +13,7 @@
 
 
     <mappers>
-        <mapper resource="mybatis/IpadServerMapper.xml" />
+        <mapper resource="mybatis/UserMapper.xml" />
     </mappers>
 
 </configuration>
