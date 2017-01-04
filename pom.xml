@@ -47,6 +47,11 @@
       <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-jdbc</artifactId>
+      <version>8.0.22</version>
+    </dependency>
     <!-- 使用SpringMVC需配置 -->
     <dependency>
       <groupId>org.springframework</groupId>
