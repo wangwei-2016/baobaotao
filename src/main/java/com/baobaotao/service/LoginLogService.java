@@ -8,6 +8,9 @@ import com.baobaotao.domain.LoginLog;
  * Create 2017 01 04 14:13
  */
 public interface LoginLogService {
-
+    /**
+     * 插入用户登录日志
+     * @param log 日志对象
+     */
     void insertLoginLog(LoginLog log);
 }

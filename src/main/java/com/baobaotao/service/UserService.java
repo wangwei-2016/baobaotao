@@ -12,7 +12,7 @@ public interface UserService {
      *  根据用户名和密码查询用户
      * @return  0：表示用户名或密码错误，1：存在并正确
      */
-    int hasMatchCount(String userName, String password);
+    Boolean hasMatchCount(String userName, String password);
 
     /**
      * 根据用户名查找User

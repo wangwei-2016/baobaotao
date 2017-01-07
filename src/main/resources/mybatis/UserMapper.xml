@@ -24,7 +24,7 @@
         from t_user
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
-    <select id="getMatchCount" resultMap="BaseResultMap">
+    <select id="getMatchCount" resultType="Integer">
     select
     count(1)
     from t_user

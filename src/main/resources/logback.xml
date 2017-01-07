@@ -20,6 +20,7 @@
     </appender>
     <!-- 按照每天生成日志文件 -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--使用相对路径时，当启动web后，会在tomcat目录的bin下生成日志。当单元测试时，没有启动tomcat则会在项目目录里生成日志-->
         <file>logback/web/${projectName}.log</file>
         <Encoding>UTF-8</Encoding>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">

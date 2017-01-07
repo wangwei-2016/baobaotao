@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private LoginLogService logService;
 
-    public int hasMatchCount(String userName, String password) {
+    public Boolean hasMatchCount(String userName, String password) {
         int count = userMapper.getMatchCount(userName, password);
-        return count > 0 ? 1 : 0;
+        return count > 0;
     }
 
     public User findUserByUserName(String userName) {
