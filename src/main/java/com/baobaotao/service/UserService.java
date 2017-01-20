@@ -2,6 +2,8 @@ package com.baobaotao.service;
 
 import com.baobaotao.domain.User;
 
+import java.util.Set;
+
 /**
  * 用户业务逻辑接口
  * author Mr.WangWei
@@ -21,6 +23,12 @@ public interface UserService {
      */
     User findUserByUserName(String userName);
 
+    /**
+     * 根据用户名查找角色
+     * @param userName 用户名
+     * @return 角色
+     */
+    Set<String> findRoles(String userName);
     /**
      *  更新用户最后登录时间、ip、积分
      * @param user 用户

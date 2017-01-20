@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class User implements Serializable {
@@ -19,6 +20,8 @@ public class User implements Serializable {
     private Date lastVisit;
 
     private String lastIp;
+
+    private List<Role> roles;
 
     public Integer getUserId() {
         return userId;
@@ -68,6 +71,14 @@ public class User implements Serializable {
         this.lastIp = lastIp == null ? null : lastIp.trim();
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -77,6 +88,7 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", lastVisit=" + lastVisit +
                 ", lastIp='" + lastIp + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

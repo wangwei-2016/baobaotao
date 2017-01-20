@@ -4,6 +4,11 @@ import com.baobaotao.domain.User;
 import com.baobaotao.service.UserService;
 import com.baobaotao.wrapper.LoginCommand;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +38,8 @@ public class LoginController {
     }
 
     @RequestMapping("/loginCheck")
-    public ModelAndView LoginCheck(HttpServletRequest request,ModelAndView modelAndView, LoginCommand loginCommand) {
-        String userName=loginCommand.getUserName();
+    public ModelAndView LoginCheck(HttpServletRequest request, ModelAndView modelAndView, LoginCommand loginCommand) {
+        String userName = loginCommand.getUserName();
         String userPwd = loginCommand.getUserPwd();
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(userPwd)) {
             return new ModelAndView("index", "error", "用户名或密码不能为空");
@@ -47,8 +52,27 @@ public class LoginController {
         userService.loginSuccess(user);
         modelAndView.addObject("user", user);
         modelAndView.setViewName("main");
-        logger.debug("login in ");
-        logger.info("login in info ");
         return modelAndView;
+    }
+
+    private String loginUser(User user) {
+        shiroLogin(user);
+    }
+
+    private String shiroLogin(User user) {
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUserName(), user.getPassword());
+        try {
+            SecurityUtils.getSubject().login(usernamePasswordToken);
+        } catch (UnknownAccountException ex) {
+            return "用户不存在或者密码错误！";
+        } catch (IncorrectCredentialsException ex) {
+            return "用户不存在或者密码错误！";
+        } catch (AuthenticationException ex) {
+            return ex.getMessage(); // 自定义报错信息
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "内部错误，请重试！";
+        }
+        return "SUCC";
     }
 }
