@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 测试类
  * author Mr.WangWei
@@ -21,5 +24,13 @@ public class UserServiceTest {
     public void getUser(){
         User user = userService.findUserByUserName("admin");
         System.out.println(user);
+    }
+
+    @Test
+    public void getTime(){
+        long t=1482831305019L;
+        Date date = new Date(t);
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(dateFormat.format(1482831305019L));
     }
 }

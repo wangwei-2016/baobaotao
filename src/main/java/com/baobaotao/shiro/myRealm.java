@@ -9,10 +9,14 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/1/20.
  */
+@Component
 public class myRealm extends AuthorizingRealm {
 
     @Autowired
@@ -23,8 +27,9 @@ public class myRealm extends AuthorizingRealm {
      */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String userName = (String) principalCollection.getPrimaryPrincipal();
+        Set<String> roles = userService.findRoles(userName);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(userService.findRoles(userName));
+        authorizationInfo.setRoles(roles);
         return authorizationInfo;
     }
 

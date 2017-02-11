@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
+    <bean id="anyRoles" class="com.baobaotao.shiro.MyRolesAuthorizationFilter"/>
+
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="cacheManager" ref="cacheManager"/>
         <property name="realm" ref="myRealm"/>
@@ -18,14 +20,19 @@
         <property name="successUrl" value="/main"/>
         <!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址 -->
         <property name="unauthorizedUrl" value="/unauthorized"/>
+        <property name="filters">
+            <map>
+                <entry key="anyRoles" value-ref="anyRoles"/>
+            </map>
+        </property>
         <!-- 权限配置 -->
         <property name="filterChainDefinitions">
             <value>
                 <!-- anon表示此地址不需要任何权限即可访问 -->
                 /index=anon
                 <!-- roles[manager]表示访问此连接需要用户的角色（roles）为manager -->
-                /main=roles[admin,manager]
-                /logout = logout
+                /main=anyRoles[admin,manager]
+                <!--/logout = logout-->
             </value>
         </property>
     </bean>
